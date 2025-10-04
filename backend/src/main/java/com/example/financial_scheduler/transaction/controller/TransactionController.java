@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.financial_scheduler.common.exceptions.RuleException;
 import com.example.financial_scheduler.transaction.dto.TransactionDTO;
 import com.example.financial_scheduler.transaction.service.TransactionService;
 
@@ -20,8 +21,8 @@ public class TransactionController {
         return service.findAll();
     }
 
-    public TransactionDTO save(TransactionDTO transactionDTO) {
-        return service.save(transactionDTO);
+    public void save(TransactionDTO transactionDTO) throws RuleException {
+        service.save(transactionDTO);
     }
 
 }
