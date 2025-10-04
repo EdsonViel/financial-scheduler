@@ -36,7 +36,6 @@ public class TransactionService {
         
         Transaction transaction = modelMapper.map(transactionDTO, Transaction.class);
 
-        //TODO: Add fee calculation logic here
         LocalDate createdTransactionDate = LocalDate.now();
         LocalDate scheduledTransactionDate = transaction.getScheduledDate();
         Long daysAhead = ChronoUnit.DAYS.between(createdTransactionDate, scheduledTransactionDate);
