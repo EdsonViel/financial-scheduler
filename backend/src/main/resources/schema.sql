@@ -10,6 +10,7 @@ CREATE TABLE transaction (
     destination_account_id bigint not null,
     amount double not null,
     scheduler_date date not null,
+    fee double not null,
     created_at timestamp default current_timestamp,
     CONSTRAINT pk_transaction PRIMARY KEY (id),
     CONSTRAINT fk_transaction_source_account FOREIGN KEY (source_account_id) REFERENCES account(id),
