@@ -1,4 +1,4 @@
-package com.example.financial_scheduler.transaction;
+package com.example.financial_scheduler.transaction.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.financial_scheduler.account.Account;
+import com.example.financial_scheduler.account.model.Account;
 
 import lombok.Data;
 
