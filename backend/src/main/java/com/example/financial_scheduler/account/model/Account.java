@@ -1,4 +1,4 @@
-package com.example.financial_scheduler.account;
+package com.example.financial_scheduler.account.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
