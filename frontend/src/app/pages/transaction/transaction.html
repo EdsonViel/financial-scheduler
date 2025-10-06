@@ -1,0 +1,46 @@
+<nz-page-header class="page-header" nzTitle="Agendar Transferência"></nz-page-header>
+<ng-container class="page-content">
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-control [nzSpan]="8">
+        <nz-form-label>Valor em R$</nz-form-label><br>
+        <nz-input-number nzPlaceHolder="R$" formControlName="amount" nzStep="0.01" style="max-width: 400px; min-width: 200px;"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="8">
+        <nz-form-label>Conta de Origem</nz-form-label><br>
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Origem" formControlName="sourceAccountId" style="max-width: 400px; min-width: 200px;">
+          <nz-option nzLabel="0000000001" nzValue="0000000001"></nz-option>
+          <nz-option nzLabel="0000000002" nzValue="0000000002"></nz-option>
+          <nz-option nzLabel="0000000003" nzValue="0000000003"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="8">
+        <nz-form-label>Conta de Destino</nz-form-label><br>
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Destino" formControlName="destinationAccountId" style="max-width: 400px; min-width: 200px;">
+          <nz-option nzLabel="0000000001" nzValue="0000000001"></nz-option>
+          <nz-option nzLabel="0000000002" nzValue="0000000002"></nz-option>
+          <nz-option nzLabel="0000000003" nzValue="0000000003"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="8">
+        <nz-form-label>Data da Transferência</nz-form-label><br>
+        <nz-date-picker formControlName="scheduledDate" nzPlaceHolder="Selecione a data" [nzFormat]="'dd/MM/yyyy'" style="max-width: 400px; min-width: 200px;"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <div style="text-align:left">
+      <button class="form-button" nz-button nzType="default" (click)="back()">Cancelar</button>
+      <button class="form-button"  nz-button nzType="primary" (click)="save()" [disabled]="!form.valid">Salvar</button>
+    </div>
+  </form>
+
+</ng-container>
