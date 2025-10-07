@@ -1,0 +1,15 @@
+.input-component {
+    width: 100%;
+}
+
+.segment-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block-end: 1rem;
+}
+
+.btn-wappers {
+    block-size: 2rem;
+    border: 1px solid var(--ant-primary-6);
+}
