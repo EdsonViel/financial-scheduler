@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import com.example.financial_scheduler.common.exceptions.RuleException;
 import com.example.financial_scheduler.fee_rule.model.FeeRule;
 import com.example.financial_scheduler.fee_rule.repository.FeeRuleRepository;
 import com.example.financial_scheduler.transaction.dto.TransactionDTO;
+import com.example.financial_scheduler.transaction.dto.TransactionListDTO;
 import com.example.financial_scheduler.transaction.model.Transaction;
 import com.example.financial_scheduler.transaction.repository.TransactionRepository;
 
@@ -27,9 +30,12 @@ public class TransactionService {
     @Autowired
     private FeeRuleRepository feeRuleRepository;
 
-    public List<TransactionDTO> findAll() {
+    public Page<TransactionListDTO> findAll(Pageable pageable) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(repository.findAll(), new TypeToken<List<TransactionDTO>>() {}.getType());
+
+        
+        return repository.findAll(pageable)
+                .map(entity -> modelMapper.map(entity, TransactionListDTO.class));
     }
 
     public void save(TransactionDTO transactionDTO) throws RuleException {

@@ -26,18 +26,12 @@ public class Transaction {
     private Long id;
 
     @ManyToOne(optional = false, targetEntity = Account.class, fetch = javax.persistence.FetchType.LAZY)
-    @JoinColumn(name = "source_account_id", referencedColumnName = "id", updatable = false, insertable = false)
+    @JoinColumn(name = "source_account_id", referencedColumnName = "id")
     private Account sourceAccount;
 
     @ManyToOne(optional = false, targetEntity = Account.class, fetch = javax.persistence.FetchType.LAZY)
-    @JoinColumn(name = "destination_account_id", referencedColumnName = "id", updatable = false, insertable = false)
+    @JoinColumn(name = "destination_account_id", referencedColumnName = "id")
     private Account destinationAccount;
-
-    @Column(name = "source_account_id", nullable = false)
-    private Long sourceAccountId;
-
-    @Column(name = "destination_account_id", nullable = false)
-    private Long destinationAccountId;
 
     private Double amount;
 
