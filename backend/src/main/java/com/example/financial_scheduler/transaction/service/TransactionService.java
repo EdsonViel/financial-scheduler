@@ -47,11 +47,13 @@ public class TransactionService {
             FeeRule feeRule = feeRuleOpt.get();
             
             if (feeRule.getFeePercentage() == null || feeRule.getFeePercentage().equals(0.0)) {
-                throw new RuleException("Fee percentage not defined in the rule.");
+                //throw new RuleException("Fee percentage not defined in the rule.");
+                throw new RuleException("Percentual da taxa não definida na regra.");
             }
 
             if (transaction.getAmount() == null || transaction.getAmount().equals(0.0)) {
-                throw new RuleException("Transaction amount not defined.");
+                //throw new RuleException("Transaction amount not defined.");
+                throw new RuleException("Valor da transação não definido.");
             }
 
             transaction.setFee(feeRule.getFeePercentage());
@@ -62,7 +64,8 @@ public class TransactionService {
             repository.save(transaction);
 
         } else {
-            throw new RuleException("No fee rule found for the given days ahead: " + daysAhead);
+            //throw new RuleException("No fee rule found for the given days ahead: " + daysAhead);
+            throw new RuleException("Nenhuma regra de taxa encontrada para os dias a frente: " + daysAhead);
         }
 
     }

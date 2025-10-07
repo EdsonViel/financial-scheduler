@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class TransactionDTO {
 
+    private Long id;
     private Long sourceAccountId;
     private Long destinationAccountId;
     private Double amount;
