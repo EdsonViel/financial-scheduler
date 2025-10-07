@@ -1,7 +1,5 @@
 package com.example.financial_scheduler.transaction.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +28,7 @@ public class TransactionController {
     @GetMapping
     public Page<TransactionListDTO> findAll(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size) {
+        @RequestParam(defaultValue = "25") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return service.findAll(pageable);
     }
@@ -38,7 +36,7 @@ public class TransactionController {
     @Transactional
     @PostMapping
     public void save(@RequestBody TransactionDTO transactionDTO) throws RuleException {
-        System.out.println(transactionDTO);
+        
         service.save(transactionDTO);
     }
 
