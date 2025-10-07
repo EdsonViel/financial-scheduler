@@ -1,16 +1,14 @@
 package com.example.financial_scheduler.transaction.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.example.financial_scheduler.common.exceptions.RuleException;
@@ -67,6 +65,8 @@ public class TransactionService {
 
             Double feeAmount = transaction.getAmount() * feeRule.getFeePercentage() / 100;
             transaction.setFee(feeAmount);
+            LocalDateTime now = LocalDateTime.now();
+            transaction.setCreatedAt(now);
 
             repository.save(transaction);
 
