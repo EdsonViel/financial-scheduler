@@ -9,6 +9,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
+import { NzNotificationPlacement, NzNotificationService } from 'ng-zorro-antd/notification';
 import { TransactionInterface } from '../../shared/interfaces/transaction-interface';
 import { Router } from '@angular/router';
 import { TransactionService } from '../../shared/services/transaction-service';
@@ -37,8 +38,11 @@ export class Transaction {
   router = inject(Router);
 
   form: FormGroup;
+  alert: boolean = false;
+  alertMessage: string = '';
+  alertType: string = '';
 
-  constructor() { 
+  constructor(private notification: NzNotificationService) { 
     this.form = new FormGroup({
       amount: new FormControl<number>(0, {nonNullable: true, validators: [Validators.required]}),
       sourceAccountId: new FormControl<number | null>(null, {nonNullable: true, validators: [Validators.required]}),
@@ -60,6 +64,37 @@ export class Transaction {
 
   save(transaction: TransactionInterface): void {
     console.log(this.form.value);
+    if (transaction.amount <= 0) {
+
+      this.create_notification('error', 'Erro', 'O valor da transação deve ser maior que zero.', 'topRight');
+      
+      return;
+    }
+    if (transaction.sourceAccountId === transaction.destinationAccountId) {
+
+      this.create_notification('error', 'Erro', 'A conta de origem e destino devem ser diferentes.', 'topRight');
+      
+      return;
+    }
+
+    let now = new Date();
+    now.setHours(0, 0, 0, 0);
+    transaction.scheduledDate.setHours(0, 0, 0, 0);
+    if (transaction.scheduledDate < now) {
+
+      this.create_notification('error', 'Erro', 'A data agendada deve ser igual ou maior que a data atual.', 'topRight');
+
+      return;
+    }
     this.transactionService.post(transaction);
+  }
+
+  create_notification(type: string, title: string, content: string, placement: NzNotificationPlacement): void {
+    this.notification.create(
+      type,
+      title,
+      content,
+      { nzPlacement: placement }
+    );
   }
 }
