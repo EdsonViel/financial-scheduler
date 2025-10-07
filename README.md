@@ -8,7 +8,7 @@ Java 11 conforme requisito do teste.
 
 Gradle foi utilizado pela sua simplicidade em comparação com o Maven.
 
-ModelMapper simplificar mapeamento.
+ModelMapper para simplificar mapeamento.
 
 Lombok para redução de escrita de código.
 
