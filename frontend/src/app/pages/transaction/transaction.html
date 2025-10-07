@@ -11,10 +11,10 @@
     <nz-form-item>
       <nz-form-control [nzSpan]="8">
         <nz-form-label>Conta de Origem</nz-form-label>
-        <nz-select class="input-component" nzShowSearch nzAllowClear nzPlaceHolder="Origem" formControlName="sourceAccountId">
-          <nz-option nzLabel="0000000001" nzValue="0000000001"></nz-option>
-          <nz-option nzLabel="0000000002" nzValue="0000000002"></nz-option>
-          <nz-option nzLabel="0000000003" nzValue="0000000003"></nz-option>
+        <nz-select class="input-component" nzShowSearch nzAllowClear nzPlaceHolder="Origem" formControlName="sourceAccountId" (ngModelChange)="readAccountsExcluding($event)">
+          @for(account of accounts; track account; let i = $index) {
+            <nz-option [nzLabel]="account.accountNumber" [nzValue]="account.id"></nz-option>
+          }
         </nz-select>
       </nz-form-control>
     </nz-form-item>
@@ -23,9 +23,9 @@
       <nz-form-control [nzSpan]="8">
         <nz-form-label>Conta de Destino</nz-form-label>
         <nz-select class="input-component" nzShowSearch nzAllowClear nzPlaceHolder="Destino" formControlName="destinationAccountId">
-          <nz-option nzLabel="0000000001" nzValue="0000000001"></nz-option>
-          <nz-option nzLabel="0000000002" nzValue="0000000002"></nz-option>
-          <nz-option nzLabel="0000000003" nzValue="0000000003"></nz-option>
+          @for(account of accountsExcluding; track account; let i = $index) {
+            <nz-option [nzLabel]="account.accountNumber" [nzValue]="account.id"></nz-option>
+          }
         </nz-select>
       </nz-form-control>
     </nz-form-item>

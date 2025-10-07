@@ -13,6 +13,7 @@ import { NzNotificationPlacement, NzNotificationService } from 'ng-zorro-antd/no
 import { TransactionInterface } from '../../shared/interfaces/transaction-interface';
 import { Router } from '@angular/router';
 import { TransactionService } from '../../shared/services/transaction-service';
+import { AccountService } from '../../shared/services/account-service';
 
 @Component({
   standalone: true,
@@ -35,12 +36,13 @@ import { TransactionService } from '../../shared/services/transaction-service';
 export class Transaction {
   
   transactionService = inject<TransactionService>(TransactionService);
+  accountService = inject<AccountService>(AccountService);
   router = inject(Router);
 
   form: FormGroup;
-  alert: boolean = false;
-  alertMessage: string = '';
-  alertType: string = '';
+
+  accounts: any[] = [];
+  accountsExcluding: any[] = [];
 
   constructor(private notification: NzNotificationService) { 
     this.form = new FormGroup({
@@ -52,6 +54,7 @@ export class Transaction {
   }
 
   ngOnInit(): void {
+    this.readAccounts();
   }
 
   onSubmit(): void {
@@ -96,5 +99,21 @@ export class Transaction {
       content,
       { nzPlacement: placement }
     );
+  }
+
+  readAccounts(): void {
+    this.accountService.getAll().then((resolve: any) => {
+      this.accounts = resolve;
+      this.form.get('destinationAccountId')?.setValue(null);
+      this.accountsExcluding = [];
+    });
+  }
+
+  readAccountsExcluding(id: any): void {
+    console.log(id);
+      this.accountService.getAllExcluding(id).then((resolve: any) => {
+      console.log(resolve);
+      this.accountsExcluding = resolve;
+    });
   }
 }
