@@ -1,1 +1,28 @@
-<p>report works!</p>
+<div>
+    <nz-card class="card" nzTitle="Relatório">
+        <ng-container class="edit-form">
+            <form nz-form>
+                <div nz-row style="display: flex; margin: auto;">
+                    @for (label of labels; track label; let i = $index) {
+                        <nz-form-item style="flex: 1; margin-right: 10px;">
+                            <nz-form-control>
+                                <nz-form-label>{{label}}</nz-form-label><br>
+                                @for (transaction of transactions; track transaction; let j = $index) {
+                                    @if (columns[i] == 'amount' || columns[i] == 'fee') {
+                                        <input class="input-field" nz-input [value]="getValue(transaction, columns[i]) | currency: 'BRL'" disabled />
+                                    } @else {
+                                        @if(columns[i] == 'scheduledDate' || columns[i] == 'createdAt') {
+                                            <input class="input-field" nz-input [value]="getValue(transaction, columns[i]) | date: 'dd/MM/yyyy HH:mm'" disabled />
+                                        } @else {
+                                            <input class="input-field" nz-input [value]="getValue(transaction, columns[i])" disabled />
+                                        }
+                                    }
+                                }
+                            </nz-form-control>
+                        </nz-form-item>
+                    }
+                </div>
+            </form>
+        </ng-container>
+    </nz-card>
+</div>

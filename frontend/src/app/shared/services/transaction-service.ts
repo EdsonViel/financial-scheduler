@@ -12,8 +12,10 @@ export class TransactionService {
     return this.httpClient.post('/api/transactions', payload);
   }
 
-  getAll() {
-    return this.httpClient.get('/api/transactions');
+  getAll(page: number = 1, size: number = 25): Promise<any> {
+    page = page - 1;
+    page = page < 0 ? 0 : page;
+    return this.httpClient.get(`/api/transactions?page=${page}&size=${size}`);
   }
   
 }
