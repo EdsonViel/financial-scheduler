@@ -111,9 +111,13 @@ export class Transaction {
 
   readAccountsExcluding(id: any): void {
     console.log(id);
+    if (this.form.get('destinationAccountId')?.value === id) {
+      this.form.get('destinationAccountId')?.setValue(null);
+    }
       this.accountService.getAllExcluding(id).then((resolve: any) => {
       console.log(resolve);
       this.accountsExcluding = resolve;
+      
     });
   }
 }
