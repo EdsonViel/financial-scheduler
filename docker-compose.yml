@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: financial-scheduler-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - financial-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: financial-scheduler-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - financial-net
+
+networks:
+  financial-net:
+    driver: bridge
