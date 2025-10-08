@@ -30,7 +30,11 @@ Angular 20.3
 
 ng-zorro-antd 20.3
 
-## Rodando a aplicação
+## Rodando a aplicação com docker
+
+docker compose up --build
+
+## Rodando a aplicação sem docker
 
 ### Backend
 
